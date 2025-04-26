@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mahotsav Registration</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            background-color: #fce4ec; /* Light pink */
+            background-image: url('https://images.unsplash.com/photo-1497366811135-64955bf29f5b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Y3VsdHVyYWwlMjBmZXN0aXZhbHxlbnwwfHwwfHww&auto=format&fit=crop&w=800&q=60'); /* Replace with a relevant image URL */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #ff69b4; /* Hot pink */
+            color: white;
+            padding: 30px 0;
+            font-size: 2.5em;
+            font-weight: bold;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            margin-bottom: 30px;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            width: 60%;
+            max-width: 700px;
+            margin: 20px auto;
+        }
+
+        h1, h2 {
+            color: #e91e63; /* Deep pink */
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        select {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        select {
+            appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg fill="currentColor" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>');
+            background-repeat: no-repeat;
+            background-position-x: 95%;
+            background-position-y: 50%;
+            background-size: 16px;
+        }
+
+        button {
+            padding: 12px 25px;
+            border: none;
+            background: #4caf50; /* Green */
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background: #45a049;
+        }
+
+        #registrationForm {
+            display: none;
+            text-align: left;
+        }
+
+        #successMessage {
+            display: none;
+            color: #2e7d32; /* Dark green */
+            font-weight: bold;
+            padding: 20px;
+            border: 1px solid #81c784;
+            background-color: #e8f5e9;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        #successMessage p {
+            margin-bottom: 10px;
+        }
+
+        #emojiGif {
+            width: 120px;
+            margin-top: 25px;
+        }
+
+        #qrCode {
+            margin-top: 15px;
+            padding: 15px;
+            border: 1px dashed #ccc;
+            border-radius: 6px;
+            background-color: #f9f9f9;
+        }
+
+        #qrCode img {
+            display: block;
+            margin: 10px auto;
+            width: 180px;
+            height: 180px;
+            border: 1px solid #ddd;
+        }
+
+        #paymentMessage {
+            display: none;
+            color: #1976d2; /* Blue */
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        footer {
+            background-color: #ff69b4;
+            color: white;
+            padding: 20px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            margin-top: 40px;
+            font-size: 16px;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .additional-info {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background-color: #f9f9f9;
+            text-align: left;
+        }
+
+        .additional-info h3 {
+            color: #e91e63;
+            margin-top: 0;
+        }
+
+        .social-icons a {
+            display: inline-block;
+            margin: 0 10px;
+            color: white;
+            font-size: 1.5em;
+            text-decoration: none;
+        }
+
+        .social-icons a:hover {
+            opacity: 0.8;
+        }
+
+        #emailOutput {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background-color: #e0f7fa; /* Light cyan */
+            text-align: left;
+            display: none; /* Initially hidden */
+        }
+
+        #emailOutput h3 {
+            color: #00838f; /* Teal */
+            margin-top: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        Mahotsav 2025 - Celebrate Culture & Art
+    </header>
+
+    <div class="container" id="aboutMahotsav">
+        <h1>Welcome to Mahotsav 2025</h1>
+        <p><strong>Date:</strong> March 25, 2025</p>
+        <p><strong>Venue:</strong> Grand Cultural Hall, City Center, Hyderabad</p>
+        <p><strong>Time:</strong> 10:00 AM onwards</p>
+        <p><strong>Highlights:</strong> Immerse yourself in a vibrant celebration featuring captivating Dance performances, soulful Music concerts, an inspiring Art Exhibition showcasing local talents, a delightful Food Festival with diverse cuisines, and engaging Drama acts.</p>
+        <p>Join us for a day filled with cultural richness and artistic expression!</p>
+        <button onclick="showRegistration()">Register Now</button>
+        <div class="additional-info">
+            <h3>Stay Connected</h3>
+            <p>Follow us for updates and behind-the-scenes glimpses:</p>
+            <div class="social-icons">
+                <a href="#" target="_blank"><i class="fab fa-facebook-square"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-twitter-square"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="registrationForm">
+        <h2>Mahotsav Registration</h2>
+        <form onsubmit="submitForm(event)">
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" placeholder="Enter your full name" required><br><br>
+            <label for="email">Email:</label>
+            <input type="email" id="email" placeholder="Enter your email address" required><br><br>
+            <label for="phone">Phone Number:</label>
+            <input type="text" id="phone" placeholder="Enter your phone number"><br><br>
+            <label for="event">Select Event(s) of Interest:</label>
+            <select id="event" multiple size="5" required>
+                <option value="Dance">Dance Performances</option>
+                <option value="Music">Music Concerts</option>
+                <option value="Art Exhibition">Art Exhibition</option>
+                <option value="Food Festival">Food Festival</option>
+                <option value="Drama">Drama Acts</option>
+                <option value="All">Attend All Events</option>
+            </select><br><br>
+            <label for="payment">Payment Method:</label>
+            <select id="payment" required>
+                <option value="online">Online (QR Code)</option>
+                <option value="offline">Offline (Cash/Card at Venue)</option>
+            </select><br><br>
+            <div id="qrCode" style="display: none;">
+                <p>Scan the QR Code for Payment:</p>
+                <img src="https://via.placeholder.com/180" alt="QR Code" width="180" height="180">
+                <p><span id="paymentMessage">Please complete the payment before submitting. You will receive a confirmation email shortly.</span></p>
+            </div>
+            <button type="submit">Submit Registration</button>
+        </form>
+    </div>
+
+    <div class="container" id="successMessage">
+        <h2>Congratulations!</h2>
+        <p>Dear <span id="candidateName"></span>, you have successfully registered for Mahotsav 2025!</p>
+        <p>Your unique Registration ID: <span id="candidateID"></span></p>
+        <p>Events you are interested in: <span id="selectedEvents"></span></p>
+        <p>A confirmation email with your registration details has been sent to <span id="registeredEmail"></span>.</p>
+        <p>We look forward to seeing you at the Grand Cultural Hall!</p>
+        <img id="emojiGif" src="https://www.icegif.com/wp-content/uploads/2022/04/icegif-931.gif" alt="Smiley Emoji">
+    </div>
+<br><br><br><br><br>
+    <footer>
+        &copy; 2025 Mahotsav Committee | Follow us on social media @Mahotsav2025
+    </footer>
+
+    <div class="container" id="emailOutput">
+        <h3>Simulated Email Output:</h3>
+        <p><strong>To:</strong> <span id="emailRecipient"></span></p>
+        <p><strong>Subject:</strong> Mahotsav 2025 Registration Confirmation</p>
+        <hr>
+        <p>Dear <span id="emailName"></span>,</p>
+        <p>Thank you for successfully registering for Mahotsav 2025!</p>
+        <p>Here are your registration details:</p>
+        <ul>
+            <li><strong>Registration ID:</strong> <span id="emailRegID"></span></li>
+            <li><strong>Full Name:</strong> <span id="emailFullName"></span></li>
+            <li><strong>Email:</strong> <span id="emailAddress"></span></li>
+            <li><strong>Phone Number:</strong> <span id="emailPhone"></span></li>
+            <li><strong>Interested Events:</strong> <span id="emailEvents"></span></li>
+            <li><strong>Payment Method:</strong> <span id="emailPayment"></span></li>
+        </ul>
+        <p><strong>Event Date:</strong> March 25, 2025</p>
+        <p><strong>Venue:</strong> Grand Cultural Hall, City Center, Hyderabad</p>
+        <p>Please keep your Registration ID for future reference.</p>
+        <p>We are excited to welcome you to Mahotsav 2025!</p>
+        <br>
+        <p>Sincerely,</p>
+        <p>The Mahotsav 2025 Committee</p>
+    </div>
+
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script>
+        function showRegistration() {
+            document.getElementById('aboutMahotsav').style.display = 'none';
+            document.getElementById('registrationForm').style.display = 'block';
+        }
+
+        function generateID() {
+            return 'MH25-' + Math.floor(10000 + Math.random() * 90000);
+        }
+
+        function submitForm(event) {
+            event.preventDefault();
+            let name = document.getElementById('name').value;
+            let email = document.getElementById('email').value;
+            let phone = document.getElementById('phone').value;
+            let selectedEventsElement = document.getElementById('event');
+            let selectedEvents = Array.from(selectedEventsElement.selectedOptions).map(option => option.value);
+            let payment = document.getElementById('payment').value;
+            let candidateID = generateID();
+
+            // Update success message
+            document.getElementById('candidateName').innerText = name;
+            document.getElementById('candidateID').innerText = candidateID;
+            document.getElementById('selectedEvents').innerText = selectedEvents.join(', ');
+            document.getElementById('registeredEmail').innerText = email;
+
+            // Display success message and hide registration form
+            document.getElementById('registrationForm').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'block';
+
+            // Simulate email output
+            document.getElementById('emailOutput').style.display = 'block';
+            document.getElementById('emailRecipient').innerText = email;
+            document.getElementById('emailName').innerText = name;
+            document.getElementById('emailFullName').innerText = name;
+            document.getElementById('emailAddress').innerText = email;
+            document.getElementById('emailPhone').innerText = phone;
+            document.getElementById('emailEvents').innerText = selectedEvents.join(', ');
+            document.getElementById('emailRegID').innerText = candidateID;
+            document.getElementById('emailPayment').innerText = payment;
+
+            // In a real application, you would send this data to a server to:
+            // 1. Store the registration details in a database.
+            // 2. Send a confirmation email to the user's email address.
+            console.log("Registration Details:", { name, email, phone, events: selectedEvents, payment, registrationID: candidateID });
+            console.log("Simulated Email sent to:", email);
+        }
+
+        document.getElementById('payment').addEventListener('change', function () {
+            let qrCodeDiv = document.getElementById('qrCode');
+            let paymentMessage = document.getElementById('paymentMessage');
+            if (this.value === 'online') {
+                qrCodeDiv.style.display = 'block';
+                paymentMessage.style.display = 'block';
+            } else {
+                qrCodeDiv.style.display = 'none';
+                paymentMessage.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+
+</html>
